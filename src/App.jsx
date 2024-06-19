@@ -14,8 +14,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="about" element={<About />} />
-          <Route path="blog" element={<Blog />} />
-          <Route path="blog/:slug" element={<BlogPost />} />
+          <Route path="blog" element={<Blog />}>
+            <Route path=":slug" element={<BlogPost />} />
+          </Route>
           <Route path="contact" element={<Contact />} />
           <Route path="*" element={<p>Not found</p>} />
         </Routes>
