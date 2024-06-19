@@ -6,8 +6,8 @@ const Blog = () => {
   return (
     <div>
       <h1>Blog</h1>
-      {BLOG_DATA.map((post, index) => (
-        <div key={index}>
+      {BLOG_DATA.map((post) => (
+        <div key={post.slug}>
           <BlogLink title={post.title} slug={post.slug} />
         </div>
       ))}

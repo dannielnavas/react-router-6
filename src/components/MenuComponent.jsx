@@ -70,8 +70,8 @@ const Menu = () => {
 
       {/* Con NavLink y un array de objetos */}
       <ul>
-        {routes.map((route, index) => (
-          <li key={index}>
+        {routes.map((route) => (
+          <li key={route.to}>
             <NavLink
               style={({ isActive }) => ({
                 color: isActive ? "red" : "blue",
