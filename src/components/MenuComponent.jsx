@@ -105,6 +105,18 @@ const routes = [
     to: "/contact",
     text: "Contact",
   },
+  {
+    to: "/login",
+    text: "Login",
+  },
+  {
+    to: "/logout",
+    text: "Logout",
+  },
+  {
+    to: "/dashboard",
+    text: "Dashboard",
+  },
 ];
 
 export { Menu };
