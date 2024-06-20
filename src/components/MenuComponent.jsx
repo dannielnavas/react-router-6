@@ -1,7 +1,10 @@
 // import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../auth";
 
 const Menu = () => {
+  const auth = useAuth();
+
   return (
     <nav>
       {/* <ul>
@@ -70,19 +73,25 @@ const Menu = () => {
 
       {/* Con NavLink y un array de objetos */}
       <ul>
-        {routes.map((route) => (
-          <li key={route.to}>
-            <NavLink
-              style={({ isActive }) => ({
-                color: isActive ? "red" : "blue",
-              })}
-              to={route.to}
-              end
-            >
-              {route.text}
-            </NavLink>
-          </li>
-        ))}
+        {routes.map((route) => {
+          if (route.publicOnly && auth.user) return null;
+
+          if (route.private && !auth.user) return null;
+
+          return (
+            <li key={route.to}>
+              <NavLink
+                style={({ isActive }) => ({
+                  color: isActive ? "red" : "blue",
+                })}
+                to={route.to}
+                end
+              >
+                {route.text}
+              </NavLink>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );
@@ -92,30 +101,38 @@ const routes = [
   {
     to: "/",
     text: "Home",
+    private: false,
   },
   {
     to: "/about",
     text: "About",
+    private: false,
   },
   {
     to: "/blog",
     text: "Blog",
+    private: false,
   },
   {
     to: "/contact",
     text: "Contact",
+    private: false,
   },
   {
     to: "/login",
     text: "Login",
+    publicOnly: true,
+    private: false,
   },
   {
     to: "/logout",
     text: "Logout",
+    private: true,
   },
   {
     to: "/dashboard",
     text: "Dashboard",
+    private: true,
   },
 ];
 
