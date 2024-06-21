@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -34,4 +34,12 @@ const useAuth = () => {
   return context;
 };
 
-export { AuthProvider, useAuth };
+const AuthProtectedRoute = ({ children }) => {
+  const auth = useAuth();
+  if (!auth.user) {
+    return <Navigate to="/login" />;
+  }
+  return children;
+};
+
+export { AuthProtectedRoute, AuthProvider, useAuth };

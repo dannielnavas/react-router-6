@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
 import { useAuth } from "../auth";
 
 const Login = () => {
@@ -11,6 +12,10 @@ const Login = () => {
     console.log(username);
     auth.login({ username });
   };
+
+  if (auth.user) {
+    return <Navigate to="/dashboard" />;
+  }
 
   return (
     <>
